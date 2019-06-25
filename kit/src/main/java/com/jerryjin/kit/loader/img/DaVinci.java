@@ -1,4 +1,4 @@
-package com.jerryjin.kit.loader;
+package com.jerryjin.kit.loader.img;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -8,7 +8,10 @@ import java.lang.ref.WeakReference;
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 16:22
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version:
  * Description:
  */
 @SuppressWarnings("SpellCheckingInspection")

@@ -1,4 +1,4 @@
-package com.jerryjin.kit.loader;
+package com.jerryjin.kit.loader.img;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +10,10 @@ import java.util.LinkedHashMap;
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 17:13
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version:
  * Description:
  */
 public class DiskLruCache {

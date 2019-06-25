@@ -2,7 +2,7 @@ package com.jerryjin.kit.network.pojo;
 
 import android.util.ArrayMap;
 
-import com.jerryjin.kit.network.MapHelper;
+import com.jerryjin.kit.data.MapHelper;
 
 import java.util.List;
 import java.util.Map;

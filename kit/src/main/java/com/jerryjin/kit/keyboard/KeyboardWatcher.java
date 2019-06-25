@@ -15,8 +15,11 @@ import java.lang.ref.WeakReference;
 /**
  * Author: Jerry
  * Generated at: 2019/6/18 13:00
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
- * Description:
+ * Version: 1.0.0
+ * Description: Supervisor of soft keyboard.
  */
 public class KeyboardWatcher {
 

@@ -1,10 +1,12 @@
-package com.ci123.babyweekend.imgs.file;
+package com.jerryjin.kit;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.jerryjin.kit.data.Writable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

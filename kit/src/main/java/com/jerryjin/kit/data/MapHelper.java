@@ -1,4 +1,4 @@
-package com.jerryjin.kit.network;
+package com.jerryjin.kit.data;
 
 import android.util.Log;
 

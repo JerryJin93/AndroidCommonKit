@@ -1,9 +1,11 @@
-package com.jerryjin.kit.helper.network;
+package com.jerryjin.kit.network;
 
-import com.jerryjin.kit.helper.network.pojo.KVPair;
+import java.io.IOException;
 
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Author: Jerry
@@ -38,10 +40,14 @@ public class FastHttp {
     }
 
     private Request buildRequest() {
-        Request request = new Request.Builder()
-                .addHeader()
-                .build();
-        return request;
+        Headers headers = httpOptions.getHeaders();
+        boolean hasHeaders = headers != null;
+        Request.Builder builder = new Request.Builder()
+                .url(httpOptions.getUrlStr());
+        if (hasHeaders) {
+            builder.headers(headers);
+        }
+        return builder.build();
     }
 
     public FastHttp setHttpOptions(FastHttpOptions fastHttpOptions) {
@@ -56,12 +62,17 @@ public class FastHttp {
     }
 
     public void runAsync(CallbackImpl callback) {
-
-
+        client.newCall(buildRequest())
+                .enqueue(callback);
     }
 
-    public void runSync() {
-
+    public Response runSync() {
+        try {
+            return client.newCall(buildRequest()).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

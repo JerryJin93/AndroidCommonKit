@@ -9,8 +9,11 @@ import android.util.TypedValue;
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 10:19
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
- * Description:
+ * Version: 1.0.0
+ * Description: Dimension helper.
  */
 @SuppressWarnings("WeakerAccess")
 public class DimensionHelper {

@@ -1,5 +1,7 @@
 package com.jerryjin.kit.network;
 
+import com.jerryjin.kit.network.pojo.HeaderParams;
+
 import java.net.URL;
 
 import okhttp3.Headers;
@@ -13,11 +15,13 @@ import okhttp3.Headers;
  * Version:
  * Description:
  */
+@SuppressWarnings("WeakerAccess")
 public class FastHttpOptions {
 
     private URL url;
     private String urlStr;
     private Headers headers;
+    private HeaderParams headerParams = new HeaderParams();
 
     public URL getUrl() {
         return url;
@@ -33,5 +37,18 @@ public class FastHttpOptions {
 
     public void setUrlStr(String urlStr) {
         this.urlStr = urlStr;
+    }
+
+    public Headers getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(Headers headers) {
+        this.headers = headers;
+    }
+
+    public FastHttpOptions addHeader(String name, String value) {
+        headerParams.add(name, value);
+        return this;
     }
 }

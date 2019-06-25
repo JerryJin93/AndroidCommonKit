@@ -1,4 +1,4 @@
-package com.jerryjin.kit.loader;
+package com.jerryjin.kit.loader.img;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -15,7 +15,10 @@ import java.util.Map;
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 15:38
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version: 1.0.0
  * Description:
  */
 public class MemoryLruCache {

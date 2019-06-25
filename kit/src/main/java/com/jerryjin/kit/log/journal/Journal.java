@@ -1,11 +1,14 @@
-package com.jerryjin.kit.journal;
+package com.jerryjin.kit.log.journal;
 
 import java.io.Serializable;
 
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 17:33
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version:
  * Description: Builder strategy.
  */
 public class Journal implements Serializable {

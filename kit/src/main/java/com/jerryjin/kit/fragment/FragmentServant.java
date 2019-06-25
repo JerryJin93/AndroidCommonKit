@@ -20,7 +20,10 @@ import java.util.UUID;
 /**
  * Author: Jerry
  * Generated at: 2019/5/29 9:47
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version:
  * Description:
  */
 @SuppressWarnings({"WeakerAccess"})

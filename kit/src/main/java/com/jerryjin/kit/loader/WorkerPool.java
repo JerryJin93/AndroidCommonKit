@@ -1,4 +1,6 @@
-package com.ci123.babyweekend.imgs;
+package com.jerryjin.kit.loader;
+
+import com.jerryjin.kit.loader.img.DaVinci;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
@@ -11,7 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Author: Jerry
  * Generated at: 2019/6/24 16:22
+ * GitHub: https://github.com/JerryJin93
+ * Blog:
  * WeChat: enGrave93
+ * Version: 1.0.0
  * Description:
  */
 public class WorkerPool {

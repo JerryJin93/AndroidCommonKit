@@ -1,4 +1,4 @@
-package com.ci123.babyweekend.imgs;
+package com.jerryjin.kit;
 
 import android.content.Context;
 import android.util.Log;
