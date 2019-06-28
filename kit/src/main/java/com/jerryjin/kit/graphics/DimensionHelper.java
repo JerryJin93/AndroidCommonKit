@@ -1,4 +1,4 @@
-package com.jerryjin.kit.view;
+package com.jerryjin.kit.graphics;
 
 import android.app.Activity;
 import android.content.Context;
