@@ -1,8 +1,10 @@
 package com.jerryjin.kit.network;
 
 import java.io.IOException;
+import java.net.URL;
 
 import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -13,9 +15,10 @@ import okhttp3.Response;
  * GitHub: https://github.com/JerryJin93
  * Blog:
  * WeChat: enGrave93
- * Version:
+ * Version: 0.0.1
  * Description:
  */
+@SuppressWarnings("WeakerAccess")
 public class FastHttp {
 
     private OkHttpClient client;
@@ -43,7 +46,7 @@ public class FastHttp {
         Headers headers = httpOptions.getHeaders();
         boolean hasHeaders = headers != null;
         Request.Builder builder = new Request.Builder()
-                .url(httpOptions.getUrlStr());
+                .url(httpOptions.getUrl());
         if (hasHeaders) {
             builder.headers(headers);
         }
@@ -57,16 +60,24 @@ public class FastHttp {
 
     public FastHttp setUrl(String url) {
         ensureHttpOptions();
-        this.httpOptions.setUrlStr(url);
+        this.httpOptions.setUrl(url);
         return Holder.instance;
     }
 
-    public void runAsync(CallbackImpl callback) {
+    public FastHttp setUrl(HttpUrl url) {
+        return setUrl(url.toString());
+    }
+
+    public FastHttp setUrl(URL url) {
+        return setUrl(url.toString());
+    }
+
+    public void executeAsync(CallbackImpl callback) {
         client.newCall(buildRequest())
                 .enqueue(callback);
     }
 
-    public Response runSync() {
+    public Response executeSync() {
         try {
             return client.newCall(buildRequest()).execute();
         } catch (IOException e) {

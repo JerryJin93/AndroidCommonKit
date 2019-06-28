@@ -20,7 +20,7 @@ import java.util.Set;
  * GitHub: https://github.com/JerryJin93
  * Blog:
  * WeChat: enGrave93
- * Version:
+ * Version: 1.0.0
  * Description:
  * <p>
  * SharedPreferencesFastHelper is it's whole name.
@@ -33,11 +33,10 @@ import java.util.Set;
 @SuppressWarnings("SpellCheckingInspection")
 public class SPFH {
 
-    // deleted impl.
-    // deleted BaseAdapter for MMKV
-    // deleted SPResponse and SPRequest
+    private static final String TAG = "SPFH";
+    private static final boolean DEBUG = false;
 
-    private static final String FILE_NAME = "SPFH";
+    private static final String FILE_NAME = "SPFH_FILE";
     private static final String SEPARATOR = ",";
     private static final String EMPTY_STRING = "";
     private SharedPreferences sharedPreferences;

@@ -18,25 +18,16 @@ import okhttp3.Headers;
 @SuppressWarnings("WeakerAccess")
 public class FastHttpOptions {
 
-    private URL url;
-    private String urlStr;
+    private String url;
     private Headers headers;
     private HeaderParams headerParams = new HeaderParams();
 
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(URL url) {
+    public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getUrlStr() {
-        return urlStr;
-    }
-
-    public void setUrlStr(String urlStr) {
-        this.urlStr = urlStr;
     }
 
     public Headers getHeaders() {
