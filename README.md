@@ -18,6 +18,6 @@ A common kit for Android devices.
 
 ```
 	dependencies {
-	        implementation 'com.github.JerryJin93:AndroidCommonKit:0.0.1'
+	        implementation 'com.github.JerryJin93:AndroidCommonKit:0.0.3'
 	}
 ```

@@ -1,4 +1,4 @@
-package com.jerryjin.kit.network;
+package com.jerryjin.kit.network.interfaces;
 
 import java.io.IOException;
 

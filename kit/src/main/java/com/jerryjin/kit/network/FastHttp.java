@@ -1,8 +1,12 @@
 package com.jerryjin.kit.network;
 
+import com.jerryjin.kit.network.interfaces.Callback;
+import com.jerryjin.kit.network.interfaces.CallbackImpl;
+
 import java.io.IOException;
 import java.net.URL;
 
+import okhttp3.Call;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -15,7 +19,7 @@ import okhttp3.Response;
  * GitHub: https://github.com/JerryJin93
  * Blog:
  * WeChat: enGrave93
- * Version: 0.0.1
+ * Version: 0.0.3
  * Description:
  */
 @SuppressWarnings("WeakerAccess")
@@ -75,6 +79,28 @@ public class FastHttp {
     public void executeAsync(CallbackImpl callback) {
         client.newCall(buildRequest())
                 .enqueue(callback);
+    }
+
+    public void executeAsync(Callback callback) {
+        final Callback mCallback = callback;
+        client.newCall(buildRequest())
+                .enqueue(new okhttp3.Callback() {
+                    @SuppressWarnings("NullableProblems")
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        if (mCallback != null) {
+                            // TODO: 2019-06-30
+                        }
+                    }
+
+                    @SuppressWarnings("NullableProblems")
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (mCallback != null) {
+                            // TODO: 2019-06-30
+                        }
+                    }
+                });
     }
 
     public Response executeSync() {
