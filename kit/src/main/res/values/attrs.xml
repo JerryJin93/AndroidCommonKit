@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LineView">
+        <attr name="lineColor" format="color"/>
+        <attr name="lineWidth" format="dimension"/>
+        <attr name="lineDirection" format="enum">
+            <enum name="portrait" value="0"/>
+            <enum name="landscape" value="1"/>
+        </attr>
+        <attr name="lineType" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="dash" value="1"/>
+        </attr>
+        <attr name="dashWidth" format="dimension"/>
+        <attr name="dashRatio" format="float"/>
+        <attr name="lineGravity" format="enum">
+            <enum name="center" value="4"/>
+        </attr>
+        <attr name="lineOffsetX" format="dimension"/>
+        <attr name="lineOffsetY" format="dimension"/>
+    </declare-styleable>
+</resources>
