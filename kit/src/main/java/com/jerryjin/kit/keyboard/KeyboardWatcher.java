@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
  * GitHub: https://github.com/JerryJin93
  * Blog:
  * WeChat: enGrave93
- * Version: 1.0.0
+ * Version: 1.0.1
  * Description: Supervisor of soft keyboard.
  */
 public class KeyboardWatcher {
@@ -92,8 +92,8 @@ public class KeyboardWatcher {
 
     }
 
-    public KeyboardWatcher setKeyboardWatcherCallback(Callback mCallback) {
-        this.mCallback = mCallback;
+    public KeyboardWatcher setKeyboardWatcherCallback(Callback callback) {
+        this.mCallback = callback;
         return this;
     }
 

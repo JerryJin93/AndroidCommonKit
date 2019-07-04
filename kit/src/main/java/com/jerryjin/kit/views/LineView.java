@@ -1,13 +1,13 @@
-package com.jerryjin.kit.graphics.views;
+package com.jerryjin.kit.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
-import android.telephony.mbms.MbmsErrors;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +52,8 @@ public class LineView extends View {
     public static final int LINE_GRAVITY_RIGHT = 2;
     public static final int LINE_GRAVITY_BOTTOM = 3;
     public static final int LINE_GRAVITY_CENTER = 4;
+    public static final int LINE_GRAVITY_CENTER_HORIZONTAL = 5;
+    public static final int LINE_GRAVITY_CENTER_VERTICAL = 6;
 
     private static final int DEFAULT_LINE_COLOR = Color.parseColor("#C4C4C4");
 
@@ -125,7 +127,7 @@ public class LineView extends View {
     }
 
     private void setPathEffect() {
-        mPathEffect = new DashPathEffect(new float[]{mDashWidth, mDashWidth / mDashWidthToDashGapRatio},1);
+        mPathEffect = new DashPathEffect(new float[]{mDashWidth, mDashWidth / mDashWidthToDashGapRatio}, 1);
     }
 
     @Override
@@ -182,7 +184,65 @@ public class LineView extends View {
         return height;
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        int saveCount = canvas.save();
+        drawLine(canvas);
+        canvas.restoreToCount(saveCount);
+    }
 
+    private void drawLine(Canvas canvas) {
+        float x, y;
+        int width = getWidth();
+        int height = getHeight();
+        switch (mLineGravity) {
+            case LINE_GRAVITY_CENTER_HORIZONTAL:
+                x = width / 2f;
+                y = 0;
+                break;
+            case LINE_GRAVITY_CENTER_VERTICAL:
+                x = 0;
+                y = height / 2f;
+                break;
+            case LINE_GRAVITY_CENTER:
+                x = width / 2f;
+                y = height / 2f;
+                break;
+            default:
+                x = y = 0;
+                break;
+        }
+        // There are only two kinds of direction of line.
+        if (mLineDirection == LINE_DIRECTION_PORTRAIT) {
+            if (mLineType == TYPE_NORMAL) {
+                canvas.drawLine(x + mLineOffsetX, y + mLineOffsetY, x + mLineOffsetX, height, mPaint);
+            } else {
+                mPath.moveTo(x + mLineOffsetX, y + mLineOffsetY);
+                mPath.lineTo(x + mLineOffsetX, height);
+                mPaint.setPathEffect(mPathEffect);
+                canvas.drawPath(mPath, mPaint);
+            }
+        } else {
+            if (mLineType == TYPE_NORMAL) {
+                canvas.drawLine(x + mLineOffsetX, y + mLineOffsetY, x + mLineOffsetX, height, mPaint);
+            } else {
+                mPath.moveTo(x + mLineOffsetX, y + mLineOffsetY);
+                mPath.lineTo(width, y + mLineOffsetY);
+                mPaint.setPathEffect(mPathEffect);
+                canvas.drawPath(mPath, mPaint);
+            }
+        }
+    }
+
+    public int getLineColor() {
+        return mLineColor;
+    }
+
+    public void setLineColor(int lineColor) {
+        this.mLineColor = lineColor;
+        invalidate();
+    }
 
     @SuppressWarnings("WeakerAccess")
     @IntDef({TYPE_NORMAL, TYPE_DASH})
@@ -192,7 +252,8 @@ public class LineView extends View {
     }
 
     @SuppressWarnings("WeakerAccess")
-    @IntDef({LINE_GRAVITY_LEFT, LINE_GRAVITY_TOP, LINE_GRAVITY_RIGHT, LINE_GRAVITY_BOTTOM, LINE_GRAVITY_CENTER})
+    @IntDef({LINE_GRAVITY_LEFT, LINE_GRAVITY_TOP, LINE_GRAVITY_RIGHT, LINE_GRAVITY_BOTTOM,
+            LINE_GRAVITY_CENTER, LINE_GRAVITY_CENTER_HORIZONTAL, LINE_GRAVITY_CENTER_VERTICAL})
     @Retention(RetentionPolicy.SOURCE)
     @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
     public @interface LineGravity {

@@ -36,4 +36,5 @@ ext{
     gifDrawableVersion = "1.2.17"
     immersiveHelperVersion = "1.0.5"
     mmkvVersion = "1.0.22"
+    recyclerViewVersion = "1.1.0-beta01"
 }

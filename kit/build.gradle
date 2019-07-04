@@ -40,4 +40,5 @@ dependencies {
     implementation "pl.droidsonroids.gif:android-gif-drawable:$rootProject.ext.gifDrawableVersion"
     implementation "com.github.JerryJin93:ImmersiveHelper:$rootProject.ext.immersiveHelperVersion"
     implementation "com.tencent:mmkv:$rootProject.ext.mmkvVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion"
 }
