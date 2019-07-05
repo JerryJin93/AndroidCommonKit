@@ -14,6 +14,7 @@ import android.view.View;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.annotation.Size;
 
 import com.jerryjin.kit.R;
 import com.jerryjin.kit.graphics.DimensionHelper;
@@ -242,6 +243,10 @@ public class LineView extends View {
     public void setLineColor(int lineColor) {
         this.mLineColor = lineColor;
         invalidate();
+    }
+
+    public void setDashInfo(@Size(2)float[] dashInfo){
+
     }
 
     @SuppressWarnings("WeakerAccess")

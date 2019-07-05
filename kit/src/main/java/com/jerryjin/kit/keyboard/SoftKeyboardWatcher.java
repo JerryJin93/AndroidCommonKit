@@ -18,12 +18,12 @@ import java.lang.ref.WeakReference;
  * GitHub: https://github.com/JerryJin93
  * Blog:
  * WeChat: enGrave93
- * Version: 1.0.1
+ * Version: 1.0.2
  * Description: Supervisor of soft keyboard.
  */
-public class KeyboardWatcher {
+public class SoftKeyboardWatcher {
 
-    private static final String TAG = "KeyboardWatcher";
+    private static final String TAG = "SoftKeyboardWatcher";
     private static final boolean DEBUG = false;
 
     private WeakReference<Activity> activityWeakReference;
@@ -32,7 +32,7 @@ public class KeyboardWatcher {
     private Callback mCallback;
     private boolean crossLock;
 
-    public KeyboardWatcher(Activity activity) {
+    public SoftKeyboardWatcher(Activity activity) {
         this.activityWeakReference = new WeakReference<>(activity);
         initNecessaryParams();
     }
@@ -57,7 +57,7 @@ public class KeyboardWatcher {
         root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                int keyboardHeight = getKeyboardHeight();
+                int keyboardHeight = getSoftKeyboardHeight();
                 if (DEBUG) {
                     Log.d(TAG, "keyboardHeight in raw pixels: " + keyboardHeight);
                 }
@@ -76,7 +76,7 @@ public class KeyboardWatcher {
         });
     }
 
-    private int getKeyboardHeight() {
+    private int getSoftKeyboardHeight() {
         if (activityWeakReference == null || activityWeakReference.get() == null) {
             throw new NullPointerException("Null Activity object reference.");
         }
@@ -92,7 +92,7 @@ public class KeyboardWatcher {
 
     }
 
-    public KeyboardWatcher setKeyboardWatcherCallback(Callback callback) {
+    public SoftKeyboardWatcher setKeyboardWatcherCallback(Callback callback) {
         this.mCallback = callback;
         return this;
     }
