@@ -23,9 +23,10 @@ import com.jerryjin.kit.navigationBar.NavigationBarHelper;
 @SuppressWarnings("WeakerAccess")
 public class SoftKeyboardHelper {
 
-    public static final int ERROR_CODE = -1;
     private static final String TAG = "SoftKeyboardHelper";
     private static final boolean DEBUG = false;
+
+    public static final int ERROR_CODE = -1;
 
     /**
      * Open soft keyboard.
