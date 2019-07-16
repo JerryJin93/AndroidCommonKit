@@ -61,7 +61,7 @@ public class LineView extends View {
     private Paint mPaint;
     @LineType
     private int mLineType;
-    private int mDashWidth;
+    private float mDashWidth;
     private float mDashWidthToDashGapRatio;
     private int mLineColor;
     private int mLineDirection;
@@ -246,7 +246,48 @@ public class LineView extends View {
     }
 
     public void setDashInfo(@Size(2)float[] dashInfo){
+        if (dashInfo == null || dashInfo.length == 0) {
+            Log.e(TAG, "Null given parameter, skip...");
+            return;
+        }
+        this.mDashWidth = dashInfo[0];
+        this.mDashWidthToDashGapRatio = dashInfo[1];
+        setPathEffect();
+        invalidate();
+    }
 
+    public int getLineType() {
+        return mLineType;
+    }
+
+    public void setLineType(int lineType) {
+        this.mLineType = lineType;
+        invalidate();
+    }
+
+    public int getLineDirection() {
+        return mLineDirection;
+    }
+
+    public void setLineDirection(int lineDirection) {
+        this.mLineDirection = lineDirection;
+        invalidate();
+    }
+
+    public int getLineWidth() {
+        return mLineWidth;
+    }
+
+    public void setLineWidth(int lineWidth) {
+        this.mLineWidth = lineWidth;
+        mPaint.setStrokeWidth(lineWidth);
+        invalidate();
+    }
+
+    public void offset(int x, int y) {
+        this.mLineOffsetX = x;
+        this.mLineOffsetY = y;
+        invalidate();
     }
 
     @SuppressWarnings("WeakerAccess")
