@@ -11,7 +11,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.0.3"
+        versionName "0.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -23,12 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility = '1.8'
+        sourceCompatibility = '1.8'
+    }
+    buildToolsVersion = '28.0.3'
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -41,4 +45,5 @@ dependencies {
     implementation "com.github.JerryJin93:ImmersiveHelper:$rootProject.ext.immersiveHelperVersion"
     implementation "com.tencent:mmkv:$rootProject.ext.mmkvVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion"
+    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
 }
