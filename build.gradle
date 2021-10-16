@@ -1,15 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.5.31'
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
-        
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Add this line
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -20,7 +22,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        
+
     }
 }
 
@@ -28,13 +30,77 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext{
+ext {
+
+    hilt_version = "2.28-alpha"
+    nav_version = "2.3.5"
+
     supportVersion = "28.0.0"
-    okHttpVersion = "3.14.2"
-    glideVersion = "4.9.0"
-    gsonVersion = "2.8.5"
-    gifDrawableVersion = "1.2.17"
+    okHttpVersion = '4.9.1'
+    glideVersion = "4.12.0"
+    gsonVersion = '2.8.8'
+    gifDrawableVersion = "1.2.23"
     immersiveHelperVersion = "1.0.5"
-    mmkvVersion = "1.0.22"
-    recyclerViewVersion = "1.1.0-beta01"
+    mmkvVersion = '1.2.10'
+    recyclerViewVersion = "1.2.1"
+
+    smart_refresh_layout_version = "2.0.3"
+
+
+    config = [
+            compileSdkVersion: 31,
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "0.0.4"
+    ]
+
+    repository = [
+            kotlinStdlib                      : "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlin_version",
+            kotlinReflect                     : "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version",
+            kotlinCoroutine                   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9",
+
+            appCompat                         : "androidx.appcompat:appcompat:1.3.1",
+            coreKtx                           : "androidx.core:core-ktx:1.6.0",
+            fragment                          : 'androidx.fragment:fragment:1.2.5',
+            material                          : 'com.google.android.material:material:1.4.0',
+            cardView                          : 'androidx.cardview:cardview:1.0.0',
+            constraintLayout                  : 'androidx.constraintlayout:constraintlayout:2.0.4',
+            recyclerView                      : "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerViewVersion",
+
+            hilt                              : "com.google.dagger:hilt-android:$rootProject.ext.hilt_version",
+            hiltCompiler                      : "com.google.dagger:hilt-android-compiler:$rootProject.ext.hilt_version",
+            navigationFragmentForJava         : "androidx.navigation:navigation-fragment:$rootProject.ext.nav_version",
+            navigationUiForJava               : "androidx.navigation:navigation-ui:$rootProject.ext.nav_version",
+            navigationFragmentForKotlin       : "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.nav_version",
+            navigationUiForKotlin             : "androidx.navigation:navigation-ui-ktx:$rootProject.ext.nav_version",
+
+            okhttp                            : "",
+
+            retrofit                          : "com.squareup.retrofit2:retrofit:2.9.0",
+            retrofitGsonConverter             : 'com.squareup.retrofit2:converter-gson:2.9.0',
+            retrofitRxJavaCallAdapter         : 'com.squareup.retrofit2:adapter-rxjava:2.9.0',
+
+            glide                             : "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion",
+            glideCompiler                     : "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion",
+            autoService                       : 'com.google.auto.service:auto-service:1.0-rc7',
+            eventBus                          : 'org.greenrobot:eventbus:3.2.0',
+            rxAndroid                         : 'io.reactivex.rxjava3:rxandroid:3.0.0',
+            rxJava                            : 'io.reactivex.rxjava3:rxjava:3.0.9',
+
+            ARouter                           : 'com.alibaba:arouter-api:1.5.1',
+            ARouterCompiler                   : 'com.alibaba:arouter-compiler:1.5.1',
+            immersiveHelper                   : "com.github.JerryJin93:ImmersiveHelper:$rootProject.ext.immersiveHelperVersion",
+            mmkv                              : "com.tencent:mmkv:$rootProject.ext.mmkvVersion",
+
+            smartRefreshLayout                : "com.scwang.smart:refresh-layout-kernel:$smart_refresh_layout_version",
+            smartRefreshLayoutClassicalHeaders: "com.scwang.smart:refresh-header-classics:$smart_refresh_layout_version",
+            smartRefreshLayoutClassicalFooters: "com.scwang.smart:refresh-footer-classics:$smart_refresh_layout_version",
+            smartRefreshLayoutRadarHeader     : "com.scwang.smart:refresh-header-radar:$smart_refresh_layout_version",
+            smartRefreshLayoutFalsifyHeader   : "com.scwang.smart:refresh-header-falsify:$smart_refresh_layout_version",
+            samrtRefreshLayoutMaterialHeader  : "com.scwang.smart:refresh-header-material:$smart_refresh_layout_version",
+            smartRefreshLayoutTwoLevelHeader  : "com.scwang.smart:refresh-header-two-level:$smart_refresh_layout_version",
+            smartRefreshLayoutBallFooter      : "com.scwang.smart:refresh-footer-ball:$smart_refresh_layout_version",
+    ]
+
 }
