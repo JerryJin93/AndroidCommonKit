@@ -53,6 +53,7 @@ dependencies {
 
     api repository.recyclerView
 
+    api repository.autoService
     api repository.glide
     kapt repository.glideCompiler
     api repository.eventBus
