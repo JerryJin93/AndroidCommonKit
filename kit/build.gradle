@@ -49,7 +49,8 @@ dependencies {
     api repository.appCompat
     api repository.coreKtx
     api repository.material
-
+    api repository.navigationFragmentForKotlin
+    api repository.navigationUiForKotlin
 
     api repository.recyclerView
 
@@ -57,14 +58,16 @@ dependencies {
     api repository.glide
     kapt repository.glideCompiler
     api repository.eventBus
+    api repository.rxJava
+    api repository.rxAndroid
 
     api repository.mmkv
     api repository.immersiveHelper
 
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation test.junit
+    androidTestImplementation test.testRunner
+    androidTestImplementation test.espresso
 
 
     api "com.squareup.okhttp3:okhttp:$rootProject.ext.okHttpVersion"

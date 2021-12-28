@@ -1,4 +1,4 @@
-package com.jerryjin.kit.views.widget;
+package com.jerryjin.kit.graphics.view.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

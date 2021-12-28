@@ -1,4 +1,4 @@
-package com.jerryjin.kit.views.list;
+package com.jerryjin.kit.graphics.view.list;
 
 import android.content.Context;
 import android.util.AttributeSet;

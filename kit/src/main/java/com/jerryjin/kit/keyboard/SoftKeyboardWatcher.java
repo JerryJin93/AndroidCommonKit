@@ -14,11 +14,17 @@ import java.lang.ref.WeakReference;
 
 /**
  * Author: Jerry
+ * <p>
  * Generated at: 2019/6/18 13:00
+ * <p>
  * GitHub: https://github.com/JerryJin93
+ * <p>
  * Blog:
- * WeChat: enGrave93
+ * <p>
+ * WeChat: AcornLake
+ * <p>
  * Version: 1.0.2
+ * <p>
  * Description: Supervisor of soft keyboard.
  */
 public class SoftKeyboardWatcher {
@@ -26,7 +32,7 @@ public class SoftKeyboardWatcher {
     private static final String TAG = "SoftKeyboardWatcher";
     private static final boolean DEBUG = false;
 
-    private WeakReference<Activity> activityWeakReference;
+    private final WeakReference<Activity> activityWeakReference;
     private boolean isNavBarShow;
     private int navBarHeight;
     private Callback mCallback;

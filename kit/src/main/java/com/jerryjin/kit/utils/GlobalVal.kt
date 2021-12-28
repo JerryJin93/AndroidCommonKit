@@ -1,5 +1,7 @@
 package com.jerryjin.kit.utils
 
+import android.os.Handler
+import android.os.Looper
 import com.tencent.mmkv.MMKV
 import org.greenrobot.eventbus.EventBus
 
@@ -21,6 +23,10 @@ import org.greenrobot.eventbus.EventBus
  * Description: Global values.
  */
 object GlobalVal {
+
+    val MAIN_HANDLER by lazy {
+        Handler(Looper.getMainLooper())
+    }
 
     val EVENT_BUS = EventBus.getDefault()
 

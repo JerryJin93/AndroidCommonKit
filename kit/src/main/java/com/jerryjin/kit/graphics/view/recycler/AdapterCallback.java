@@ -1,4 +1,4 @@
-package com.jerryjin.kit.views.recycler;
+package com.jerryjin.kit.graphics.view.recycler;
 
 /**
  * Author: Jerry

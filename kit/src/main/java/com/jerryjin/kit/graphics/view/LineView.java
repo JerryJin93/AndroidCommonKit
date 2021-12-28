@@ -1,4 +1,4 @@
-package com.jerryjin.kit.views;
+package com.jerryjin.kit.graphics.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 
 import com.jerryjin.kit.R;
-import com.jerryjin.kit.graphics.DimensionHelper;
+import com.jerryjin.kit.graphics.utils.DimensionHelper;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

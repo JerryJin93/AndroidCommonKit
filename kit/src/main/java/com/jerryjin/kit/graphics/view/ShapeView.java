@@ -1,4 +1,4 @@
-package com.jerryjin.kit.views;
+package com.jerryjin.kit.graphics.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

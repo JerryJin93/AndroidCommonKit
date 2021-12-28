@@ -13,12 +13,18 @@ import com.jerryjin.kit.navigationBar.NavigationBarHelper;
 
 /**
  * Author: Jerry
+ * <p>
  * Generated at: 2019-07-05 22:26
+ * <p>
  * GitHub: https://github.com/JerryJin93
+ * <p>
  * Blog:
- * WeChat: enGrave93
+ * <p>
+ * WeChat: AcornLake
+ * <p>
  * Version: 1.0.0
- * Description:
+ * <p>
+ * Description: Helper class for soft keyboard.
  */
 @SuppressWarnings("WeakerAccess")
 public class SoftKeyboardHelper {
