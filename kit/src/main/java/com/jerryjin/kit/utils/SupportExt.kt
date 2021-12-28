@@ -71,6 +71,14 @@ suspend fun (() -> Unit).repeat(overall: Long, interval: Long) {
     }
 }
 
+fun <T : Comparable<T>> List<T>.minItem() : T? =
+    if (size == 0) null
+    else fold(this[0]) { initial, next ->
+        if (initial < next) initial
+        else next
+    }
+
+
 fun <T : Comparable<T>> List<T>.maxItem(): T? =
     if (size == 0) null
     else fold(this[0]) { initial, next ->
