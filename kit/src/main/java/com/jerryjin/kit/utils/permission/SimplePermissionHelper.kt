@@ -1,6 +1,7 @@
 package com.jerryjin.kit.utils.permission
 
 import android.app.Activity
+import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,21 +27,21 @@ class SimplePermissionHelper {
     companion object {
 
         @JvmStatic
-        fun checkPermission(activity: Activity, permission: String) =
+        fun checkPermission(context: Context, permission: String) =
             ContextCompat.checkSelfPermission(
-                activity,
+                context,
                 permission
             ) == PackageManager.PERMISSION_GRANTED
 
         @JvmStatic
         fun checkPermissions(
-            activity: Activity,
+            context: Context,
             vararg permissions: String,
             whichOnesFallBack: (List<String>) -> Unit
         ) = permissions.let {
             val fallbacks = mutableListOf<String>()
             for (item in it) {
-                if (!checkPermission(activity, item))
+                if (!checkPermission(context, item))
                     fallbacks.add(item)
             }
             whichOnesFallBack(fallbacks)
