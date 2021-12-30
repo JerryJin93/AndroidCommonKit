@@ -1,4 +1,4 @@
-package com.jerryjin.kit.kotlinext
+package com.jerryjin.kit.utils.kotlin_ext
 
 import android.animation.ValueAnimator
 import android.view.View

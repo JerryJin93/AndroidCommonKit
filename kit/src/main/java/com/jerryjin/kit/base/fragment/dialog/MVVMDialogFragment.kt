@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jerryjin.kit.base.lifecycle.EventBusObserver
 import com.jerryjin.kit.graphics.animation.AnimConfig
 import com.jerryjin.kit.graphics.animation.OnAnimationEnd
-import com.jerryjin.kit.kotlinext.dip
+import com.jerryjin.kit.utils.kotlin_ext.dip
 
 /**
  * Author: Jerry

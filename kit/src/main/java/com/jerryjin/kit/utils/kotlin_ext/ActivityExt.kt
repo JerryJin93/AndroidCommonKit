@@ -1,4 +1,4 @@
-package com.jerryjin.kit.utils
+package com.jerryjin.kit.utils.kotlin_ext
 
 import android.app.Activity
 import android.content.ActivityNotFoundException

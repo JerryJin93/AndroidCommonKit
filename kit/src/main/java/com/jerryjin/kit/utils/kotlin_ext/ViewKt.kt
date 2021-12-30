@@ -1,4 +1,4 @@
-package com.jerryjin.kit.kotlinext
+package com.jerryjin.kit.utils.kotlin_ext
 
 import android.content.res.Resources
 import android.graphics.Rect

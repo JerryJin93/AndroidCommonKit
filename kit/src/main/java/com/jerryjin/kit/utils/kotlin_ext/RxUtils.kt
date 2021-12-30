@@ -1,4 +1,4 @@
-package com.jerryjin.kit.utils
+package com.jerryjin.kit.utils.kotlin_ext
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.ObservableTransformer

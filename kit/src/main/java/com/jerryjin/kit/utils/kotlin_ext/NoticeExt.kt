@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-package com.jerryjin.kit.utils
+package com.jerryjin.kit.utils.kotlin_ext
 
 import android.content.Context
 import android.view.View
