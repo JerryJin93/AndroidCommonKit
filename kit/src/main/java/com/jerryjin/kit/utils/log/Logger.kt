@@ -49,6 +49,8 @@ class SimpleLogger private constructor() {
 
     companion object {
 
+        private const val VOID = ""
+
         var isDebug = false
 
         var tag: String = App.instance.packageName
@@ -57,19 +59,25 @@ class SimpleLogger private constructor() {
         fun print(
             priority: LogPriority = LogPriority.DEBUG,
             tag: String = Companion.tag,
+            subTag: String = VOID,
             msg: String
         ) {
+            val msgConverter: () -> String = {
+                "$subTag${
+                    if (subTag == VOID) VOID else " -> "
+                }$msg"
+            }
             if (isDebug) {
                 // In order to be seen more clearly in the logcat of Android Studio,
                 // we choose Log#e
-                Log.e(tag, msg)
+                Log.e(tag, msgConverter())
             } else {
                 when (priority) {
-                    LogPriority.DEBUG -> Log.d(tag, msg)
-                    LogPriority.ERROR -> Log.e(tag, msg)
-                    LogPriority.INFO -> Log.i(tag, msg)
-                    LogPriority.VERBOSE -> Log.v(tag, msg)
-                    LogPriority.WARNING -> Log.w(tag, msg)
+                    LogPriority.DEBUG -> Log.d(tag, msgConverter())
+                    LogPriority.ERROR -> Log.e(tag, msgConverter())
+                    LogPriority.INFO -> Log.i(tag, msgConverter())
+                    LogPriority.VERBOSE -> Log.v(tag, msgConverter())
+                    LogPriority.WARNING -> Log.w(tag, msgConverter())
                 }
             }
         }

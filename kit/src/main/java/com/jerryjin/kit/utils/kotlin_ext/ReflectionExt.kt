@@ -1,6 +1,10 @@
 package com.jerryjin.kit.utils.kotlin_ext
 
 import android.util.Log
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+import kotlin.jvm.internal.Reflection
+import kotlin.reflect.KClass
 
 /**
  * Author: Jerry
@@ -75,3 +79,42 @@ inline fun <reified T, V> T.replaceField(name: String, value: V): Unit =
             Log.e(LOG_TAG, e.message ?: ExceptionInInitializerError::class.java.name)
         }
     }
+
+fun <T, V> T.replaceField(cls: Class<*>, fieldName: String, value: V) {
+    try {
+        cls.getDeclaredField(fieldName).apply {
+            isAccessible = true
+            set(this@replaceField, value)
+            Log.d(LOG_TAG, "Replaced successfully.")
+        }
+    } catch (e: NoSuchFieldException) {
+        Log.e(LOG_TAG, e.message ?: NoSuchFieldException::class.java.name)
+    } catch (e: NullPointerException) {
+        Log.e(LOG_TAG, e.message ?: NullPointerException::class.java.name)
+    } catch (e: SecurityException) {
+        Log.e(LOG_TAG, e.message ?: SecurityException::class.java.name)
+    } catch (e: IllegalAccessException) {
+        Log.e(LOG_TAG, e.message ?: IllegalAccessException::class.java.name)
+    } catch (e: IllegalArgumentException) {
+        Log.e(LOG_TAG, e.message ?: IllegalArgumentException::class.java.name)
+    } catch (e: ExceptionInInitializerError) {
+        Log.e(LOG_TAG, e.message ?: ExceptionInInitializerError::class.java.name)
+    }
+}
+
+/**
+ * Get the actual parameterized types of the superclass.
+ */
+inline fun <reified T> T.getSuperClassActualGenericTypes(): Array<Type> =
+    T::class.java.genericSuperclass?.let {
+        it as? ParameterizedType
+    }?.actualTypeArguments ?: emptyArray()
+
+fun Class<*>.toKotlinClass(): KClass<*> = Reflection.createKotlinClass(this)
+
+/**
+ * Get the actual parameterized types' map of the given type [T] instance.
+ */
+inline fun <reified T> T.getInterfacesActualGenericTypes(): Map<Type, Array<Type>> =
+    T::class.java.genericInterfaces.filterIsInstance<ParameterizedType>()
+        .associateWith { parameterizedType -> (parameterizedType as ParameterizedType).actualTypeArguments }

@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.EditText;
 
-import com.jerryjin.kit.navigationBar.NavigationBarHelper;
+import androidx.annotation.NonNull;
+
+import com.jerryjin.kit.utils.navigationBar.NavigationBarHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -48,7 +51,7 @@ public class SoftKeyboardWatcher {
             throw new NullPointerException("Null Activity instance reference.");
         }
         Activity activity = activityWeakReference.get();
-        isNavBarShow = NavigationBarHelper.isNavBarShow(activity);
+        isNavBarShow = NavigationBarHelper.isNavBarShown(activity);
         navBarHeight = NavigationBarHelper.getNavBarHeight(activity);
     }
 
@@ -115,5 +118,49 @@ public class SoftKeyboardWatcher {
          * Will be invoked when the keyboard is fold.
          */
         void onKeyboardClosed();
+    }
+
+    public static abstract class CallbackImpl<T> implements Callback {
+
+        private final WeakReference<T> weakRef;
+
+        public CallbackImpl(WeakReference<T> weakRef) {
+            this.weakRef = weakRef;
+        }
+
+        @Override
+        public void onKeyboardOpened(int keyboardHeight) {
+            T ref = weakRef.get();
+            if (ref == null) return;
+            onKeyboardOpened(keyboardHeight, ref);
+        }
+
+        @Override
+        public void onKeyboardClosed() {
+            T ref = weakRef.get();
+            if (ref == null) return;
+            onKeyboardClosed(ref);
+        }
+
+        public abstract void onKeyboardOpened(int keyboardHeight, @NonNull T ref);
+
+        public abstract void onKeyboardClosed(@NonNull T ref);
+    }
+
+    public static abstract class EditTextCallbackImpl extends CallbackImpl<EditText> {
+
+        public EditTextCallbackImpl(EditText editText) {
+            super(new WeakReference<>(editText));
+        }
+
+        @Override
+        public void onKeyboardOpened(int keyboardHeight, @NonNull EditText ref) {
+
+        }
+
+        @Override
+        public void onKeyboardClosed(@NonNull EditText ref) {
+
+        }
     }
 }

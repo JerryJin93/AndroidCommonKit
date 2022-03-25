@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-import com.jerryjin.kit.navigationBar.NavigationBarHelper;
+import com.jerryjin.kit.utils.navigationBar.NavigationBarHelper;
 
 /**
  * Author: Jerry
@@ -39,7 +39,7 @@ public class SoftKeyboardHelper {
      * @param context The context for getting {@link InputMethodManager} object.
      * @param anchor The currently focused view, which would like to receive soft keyboard input.
      */
-    public void openSoftKeyboard(Context context, View anchor) {
+    public static void openSoftKeyboard(Context context, View anchor) {
         if (context == null) {
             Log.e(TAG, "Null given context, skipping...");
             return;
@@ -48,7 +48,7 @@ public class SoftKeyboardHelper {
         imm.showSoftInput(anchor, InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
 
-    public void closeSoftKeyboard(Context context, View anchor) {
+    public static void closeSoftKeyboard(Context context, View anchor) {
         if (context == null) {
             Log.e(TAG, "Null given context, skipping...");
             return;
@@ -63,7 +63,7 @@ public class SoftKeyboardHelper {
             return ERROR_CODE;
         }
         Rect rect = new Rect();
-        boolean isNavBarShow = NavigationBarHelper.isNavBarShow(activity);
+        boolean isNavBarShow = NavigationBarHelper.isNavBarShown(activity);
         int navBarHeight = NavigationBarHelper.getNavBarHeight(activity);
 
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
