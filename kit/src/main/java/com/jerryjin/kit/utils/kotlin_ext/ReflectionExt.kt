@@ -102,6 +102,35 @@ fun <T, V> T.replaceField(cls: Class<*>, fieldName: String, value: V) {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T, V> T.getFieldObj(name: String) : V? =
+    T::class.java.let {
+        try {
+            it.getDeclaredField(name).run {
+                isAccessible = true
+                get(this@getFieldObj) as V
+            }
+        } catch (e: NoSuchFieldException) {
+            Log.e(LOG_TAG, e.message ?: NoSuchFieldException::class.java.name)
+            null
+        } catch (e: NullPointerException) {
+            Log.e(LOG_TAG, e.message ?: NullPointerException::class.java.name)
+            null
+        } catch (e: SecurityException) {
+            Log.e(LOG_TAG, e.message ?: SecurityException::class.java.name)
+            null
+        } catch (e: IllegalAccessException) {
+            Log.e(LOG_TAG, e.message ?: IllegalAccessException::class.java.name)
+            null
+        } catch (e: IllegalArgumentException) {
+            Log.e(LOG_TAG, e.message ?: IllegalArgumentException::class.java.name)
+            null
+        } catch (e: ExceptionInInitializerError) {
+            Log.e(LOG_TAG, e.message ?: ExceptionInInitializerError::class.java.name)
+            null
+        }
+    }
+
 /**
  * Get the actual parameterized types of the superclass.
  */
