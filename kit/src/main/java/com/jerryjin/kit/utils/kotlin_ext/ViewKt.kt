@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.res.Resources
 import android.graphics.Rect
 import android.util.TypedValue
+import android.view.MotionEvent
 import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewGroup
@@ -135,10 +136,18 @@ infix fun EditText.clearFocusAutomaticallyIn(activity: Activity) =
  * Close soft keyboard automatically.
  */
 @SuppressLint("ClickableViewAccessibility")
-fun EditText.autoCloseSoftKeyboard() = (parent as? ViewGroup)?.setOnTouchListener { v, _ ->
-    SoftKeyboardHelper.closeSoftKeyboard(context, v)
-    false
-}
+fun EditText.autoCloseSoftKeyboard(mParent: View? = null) =
+    { view: View, _: MotionEvent ->
+        SoftKeyboardHelper.closeSoftKeyboard(context, view)
+        false
+    }.run onTouchListener@{
+        mParent.takeIf { it != null }?.run {
+            if (this is ViewGroup)
+                for (i in 0 until childCount)
+                    getChildAt(i).setOnTouchListener(this@onTouchListener)
+            else setOnTouchListener(this@onTouchListener)
+        } ?: (parent as? ViewGroup)?.setOnTouchListener(this@onTouchListener)
+    }
 
 fun ScrollView.scrollBySmoothly(x: Int, y: Int) = post { scrollBy(x, y) }
 

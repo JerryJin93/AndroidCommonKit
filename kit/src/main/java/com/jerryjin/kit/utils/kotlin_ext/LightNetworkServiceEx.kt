@@ -1,10 +1,7 @@
 package com.jerryjin.kit.utils.kotlin_ext
 
 import com.jerryjin.kit.network.BaseResponse
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * Author: Jerry
@@ -30,24 +27,39 @@ class NetworkRequest<PureResultType, ResultType : BaseResponse<PureResultType>, 
     var codeSuccess = CODE_SUCCESS
     var messageSuccess = MSG_SUCCESS
     lateinit var requestBlock: (suspend APIService.() -> ResultType)
-    var onStart: (() -> Unit)? = null
-    var onSuccess: ((APIResponse.Success<PureResultType>) -> Unit)? = null
-    var onError: ((APIResponse.Error) -> Unit)? = null
+    var onStart: (suspend () -> Unit)? = null
+    var onSuccess: (suspend (APIResponse.Success<PureResultType>) -> Unit)? = null
+    var onError: (suspend (APIResponse.Error) -> Unit)? = null
     var onException: ((APIResponse.WithException) -> Unit)? = null
 }
 
 inline fun <PureResultType, reified ResultType : BaseResponse<PureResultType>, APIService> CoroutineScope.fireHttpRequest(
     service: APIService,
+    crossinline requestConfig: NetworkRequest<PureResultType, ResultType, APIService>.() -> Unit,
+) = launch {
+    if (isActive)
+        fireHttpRequestWithSuspension(service, requestConfig)
+}
+
+suspend inline fun <PureResultType, reified ResultType : BaseResponse<PureResultType>, APIService> fireHttpRequestWithSuspension(
+    service: APIService,
     requestConfig: NetworkRequest<PureResultType, ResultType, APIService>.() -> Unit,
 ) = NetworkRequest<PureResultType, ResultType, APIService>().run {
     requestConfig()
+    // useless CoroutineExceptionHandler, see more details in its comments.
     val handler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
         onException?.invoke(APIResponse.WithException.of(throwable))
     }
-    launch(SupervisorJob() + handler) {
+    withContext(Dispatchers.Main + SupervisorJob() + handler) {
         onStart?.invoke()
-        val result = service?.requestBlock()
+        val result = try {
+            withContext(Dispatchers.IO) { service?.requestBlock() }
+        } catch (e: Exception) {
+            onError?.invoke(APIResponse.ServerError(e.run { message ?: toString() }))
+                ?: return@withContext
+            return@withContext
+        }
         if (result != null) {
             val code = result.code
             val msg = result.msg
@@ -77,10 +89,15 @@ sealed class APIResponse {
         }
     }
 
-    class Error private constructor(val code: Int, val msg: String) : APIResponse() {
+    open class Error(val code: Int, val msg: String) : APIResponse() {
+
         companion object {
+            const val CODE_INTERNAL_SERVER_ERROR = 500
+
             @JvmStatic
             fun of(code: Int, msg: String) = Error(code, msg)
         }
     }
+
+    class ServerError(message: String) : APIResponse.Error(CODE_INTERNAL_SERVER_ERROR, message)
 }
